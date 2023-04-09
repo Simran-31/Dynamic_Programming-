@@ -1,0 +1,60 @@
+//************************* without using length array  as additonal ********************************************
+
+//{ Driver Code Starts
+// Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+// User function Template for C++
+
+class Solution{
+  public:
+   
+    int cutRod(int price[], int n) {
+     
+        //code here
+         int T[n + 1];
+ 
+    // initialize maximum profit to 0
+    for (int i = 0; i <= n; i++) {
+        T[i] = 0;
+    }
+ 
+    // consider a rod of length `i`
+    for (int i = 1; i <= n; i++)
+    {
+        // divide the rod of length `i` into two rods of length `j`
+        // and `i-j` each and take maximum
+        for (int j = 1; j <= i; j++) {
+            T[i] = max(T[i], price[j - 1] + T[i - j]);
+        }
+    }
+ 
+    // `T[n]` stores the maximum profit achieved from a rod of length `n`
+    return T[n];
+}
+ 
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        int a[n];
+        for (int i = 0; i < n; i++) 
+            cin >> a[i];
+            
+        Solution ob;
+
+        cout << ob.cutRod(a, n) << endl;
+    }
+    return 0;
+}
+// } Driver Code Ends
